@@ -1,0 +1,11 @@
+{
+  "clientes": [
+    {
+      "nombre": "Roberto García",
+      "email": "roberto@gmail.es",
+      "telefono": "111111111",
+      "empresa": "IES La Marxadella",
+      "id": "5"
+    }
+  ]
+}

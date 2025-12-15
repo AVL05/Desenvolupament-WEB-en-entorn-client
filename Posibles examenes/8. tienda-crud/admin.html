@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Productos</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <h1>📦 Panel de Administración</h1>
+  <form id="formulario">
+    <input type="text" id="nombre" placeholder="Nombre">
+    <input type="number" id="precio" placeholder="Precio">
+    <input type="text" id="categoria" placeholder="Categoría">
+    <input type="number" id="stock" placeholder="Stock">
+    <input type="text" id="imagen" placeholder="URL Imagen">
+    <button type="submit">Guardar</button>
+  </form>
+
+  <table>
+    <thead>
+      <tr><th>Imagen</th><th>Nombre</th><th>Precio</th><th>Categoría</th><th>Stock</th><th>Acciones</th></tr>
+    </thead>
+    <tbody id="tabla-productos"></tbody>
+  </table>
+
+  <script type="module" src="js/admin.js"></script>
+</body>
+</html>

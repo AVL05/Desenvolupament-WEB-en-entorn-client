@@ -1,0 +1,20 @@
+{
+  "productos": [
+    {
+      "id": 1,
+      "nombre": "Auriculares Bluetooth",
+      "precio": 29.99,
+      "categoria": "Electrónica",
+      "stock": 15,
+      "imagen": "https://via.placeholder.com/150"
+    },
+    {
+      "id": 2,
+      "nombre": "Camiseta Algodón",
+      "precio": 12.5,
+      "categoria": "Ropa",
+      "stock": 40,
+      "imagen": "https://via.placeholder.com/150"
+    }
+  ]
+}
