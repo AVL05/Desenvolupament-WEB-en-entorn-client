@@ -1,7 +1,10 @@
 <template>
-  <div class="alerta"></div>
+  <div class="alerta">
+    <slot></slot>
+  </div>
 </template>
-<style>
+
+<style scoped>
 .alerta {
   padding: 1rem;
   font-weight: 900;
