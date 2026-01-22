@@ -1,116 +1,203 @@
-# 📘 **APUNTES: Cómo se enseña a trabajar con Vue.js en el PDF**
-
-## 🎯 **Enfoque general del PDF**
-
-El documento enseña Vue.js **paso a paso**, con un estilo muy práctico:
-
-- Primero te muestra **qué herramienta usar** (Vite, create-vue, DevTools).
-- Luego te enseña **cómo crear un proyecto desde cero**.
-- Después te guía por **la estructura del proyecto**.
-- Más tarde introduce **los conceptos fundamentales** (SFC, State, Props, Eventos…).
-- Y finalmente te hace construir una **aplicación completa** (Tienda de guitarras).
-
-La metodología es siempre la misma:
-
-> **1. Explicación → 2. Ejemplo → 3. Práctica guiada → 4. Aplicación real**
+# 📘 **APUNTES: FUNDAMENTOS DE VUE.JS (Vue 3 + Vite)**
 
 ---
 
-# 🧱 **1. Crear un proyecto con Vite**
+# 1. 🟢 **Introducción a Vue.js**
 
-El PDF enseña a crear un proyecto así:
+- Framework progresivo de JavaScript (2014, Evan You).
+- Ideal para proyectos pequeños y grandes.
+- Basado en **componentes**.
+- Programado en **TypeScript y JavaScript**.
+- Última versión estable mencionada: **3.4.5**.
+- Muy versátil, accesible y fácil de integrar.
 
-1. Abrir terminal en la carpeta deseada.
-2. Ejecutar:
+---
 
-```
+# 2. 🛠️ **Tecnologías necesarias**
+
+- **Vite** → herramienta de desarrollo rápida (sustituto moderno de Webpack).
+- **create-vue** → asistente para crear proyectos Vue.
+- **Node.js ≥ 14.18**.
+- **Vue DevTools** (Chrome/Firefox).
+- Extensiones de Vue para VS Code.
+
+---
+
+# 3. 🚀 **Primeros pasos con Vite**
+
+### Crear proyecto:
+
+```bash
 npm create vite@latest
 ```
 
-3. Elegir:
-   - Nombre del proyecto
-   - Framework: **Vue**
-   - Variante: **JavaScript**
-4. Instalar dependencias y arrancar:
+Pasos:
 
-```
-npm install
+1. Elegir nombre del proyecto.
+2. Seleccionar framework → **Vue**.
+3. Seleccionar variante → **JavaScript**.
+4. Instalar dependencias.
+5. Ejecutar servidor:
+
+```bash
 npm run dev
 ```
 
-👉 El PDF recalca que Vite permite **HMR** (Hot Module Reload), así que los cambios se ven al instante.
-
----
-
-# 🗂️ **2. Entender la estructura del proyecto**
-
-El PDF explica carpeta por carpeta:
-
-| Carpeta / Archivo | Para qué sirve                   |
-| ----------------- | -------------------------------- |
-| `src/`            | Código principal                 |
-| `components/`     | Componentes Vue                  |
-| `assets/`         | Imágenes y recursos              |
-| `App.vue`         | Componente raíz                  |
-| `main.js`         | Monta la app                     |
-| `public/`         | Archivos accesibles directamente |
-
-👉 Importante: **Vue accede a `public/` sin poner `/public` en la ruta**.
-
----
-
-# 🧩 **3. Single File Components (SFC)**
-
-El PDF enseña que un componente Vue tiene 3 partes:
+### Estructura del proyecto:
 
 ```
-<script setup>
-</script>
-
-<template>
-</template>
-
-<style>
-</style>
+.vscode/
+node_modules/
+public/
+src/
+  assets/
+  components/
+  App.vue
+  main.js
+index.html
+package.json
+vite.config.js
 ```
 
-Cada parte tiene su función:
+### main.js
 
-- **script** → lógica, imports, states, funciones
-- **template** → HTML dinámico
-- **style** → estilos del componente
+```js
+createApp(App).mount("#app");
+```
 
 ---
 
-# 🔄 **4. State: ref() y reactive()**
+# 4. 🧩 **Elementos básicos de Vue**
 
-El PDF enseña a usar ambos, comparándolos:
+- Todo se basa en **componentes**.
+- Un componente puede recibir **props** y emitir **eventos**.
+- Reactividad mediante **ref()** y **reactive()**.
 
-### ✔️ `reactive()`
+---
+
+# 5. 📄 **Single File Components (SFC)**
+
+Un componente `.vue` tiene 3 secciones:
+
+```vue
+<script setup></script>
+
+<template></template>
+
+<style scoped></style>
+```
+
+- `<script setup>` → Composition API simplificada.
+- `<template>` → HTML reactivo.
+- `<style scoped>` → estilos solo para este componente.
+
+---
+
+# 6. 🧱 **Preparación del proyecto**
+
+- Imágenes deben ir en `/public`.
+- Vue accede a `/public` directamente → NO usar `./public/...`.
+- Copiar HTML base al `<template>` de `App.vue`.
+- Estilos globales en `style.css`.
+
+---
+
+# 7. 🧠 **API Styles: Options API vs Composition API**
+
+## Options API
+
+Estructura basada en objetos:
+
+```js
+export default {
+  data() {
+    return { productos: [] };
+  },
+  methods: { agregar() {} },
+  mounted() {},
+};
+```
+
+## Composition API (recomendada)
+
+```js
+import { ref } from "vue";
+
+const productos = ref([]);
+const agregar = () => {};
+```
+
+Ventajas:
+
+- Código más reutilizable.
+- Mejor organización en proyectos grandes.
+
+---
+
+# 8. 🧱 **Creación de componentes**
+
+Ejemplo: `Header.vue`
+
+- Se crea en `/components`.
+- Se importa en `App.vue`:
+
+```js
+import Header from "./components/Header.vue";
+```
+
+- Se usa en `<template>`:
+
+```html
+<header />
+```
+
+---
+
+# 9. 🔄 **State en Vue (Reactividad)**
+
+## 9.1. `reactive()`
 
 - Para **objetos**.
-- Se accede como objeto normal.
-- Vue usa **Proxy** para detectar cambios.
 
-### ✔️ `ref()`
+```js
+const libro = reactive({
+  nombre: "Algoritmos",
+  precio: 30,
+});
+```
 
-- Para **strings, números, arrays, booleans**.
-- Se accede con `.value` en `<script>`.
-- En `<template>` NO se usa `.value`.
+## 9.2. `ref()`
 
-👉 El PDF insiste en que **para arrays es mejor ref()**.
+- Para **strings, números, booleanos, arrays u objetos**.
+
+```js
+const clientes = ref([]);
+clientes.value.push("Juan");
+```
+
+### Diferencias clave:
+
+| ref()                               | reactive()           |
+| ----------------------------------- | -------------------- |
+| Necesita `.value`                   | No necesita `.value` |
+| Ideal para arrays y valores simples | Ideal para objetos   |
+| Devuelve un wrapper                 | Devuelve un proxy    |
 
 ---
 
-# 🧬 **5. Ciclo de vida: onMounted()**
+# 10. ⏳ **Métodos de ciclo de vida**
 
-El PDF enseña:
+Importar:
 
-- Se importa de Vue.
-- Se ejecuta cuando el componente ya está en pantalla.
-- Se usa para cargar datos, inicializar states, leer localStorage…
+```js
+import { onMounted } from "vue";
+```
 
-Ejemplo típico del PDF:
+### `onMounted()`
+
+Se ejecuta cuando el componente ya está en el DOM.
+
+Ejemplo:
 
 ```js
 onMounted(() => {
@@ -120,58 +207,67 @@ onMounted(() => {
 
 ---
 
-# 🔁 **6. Directivas**
+# 11. 🏷️ **Directivas de Vue**
 
-El PDF explica las más importantes:
+Directivas más importantes:
 
-- `v-for` → bucles
-- `v-bind` o `:` → enlazar atributos
-- `v-on` o `@` → eventos
-- `v-if / v-else / v-else-if` → condicionales
-- `v-model` → formularios
+| Directiva                     | Uso                  |
+| ----------------------------- | -------------------- |
+| `v-for`                       | Iteraciones          |
+| `v-if`, `v-else`, `v-else-if` | Condicionales        |
+| `v-bind` o `:`                | Enlazar atributos    |
+| `v-on` o `@`                  | Eventos              |
+| `v-model`                     | Enlace bidireccional |
+| `v-show`                      | Mostrar/ocultar      |
 
-Siempre con ejemplos prácticos.
+Ejemplo `v-for`:
+
+```html
+<div v-for="guitarra in guitarras"></div>
+```
 
 ---
 
-# 🧱 **7. Componentes y Props**
+# 12. 🔗 **Componentes y Props**
 
-El PDF enseña:
+Pasar datos del padre al hijo:
 
-1. Crear un componente nuevo.
-2. Pasarle datos desde el padre con:
-
-```
+```html
 <Guitarra :guitarra="guitarra" />
 ```
 
-3. Recogerlos en el hijo con:
+En el hijo:
 
 ```js
 const props = defineProps({
-  guitarra: Object,
+  guitarra: { type: Object, required: true },
 });
 ```
 
-👉 El PDF insiste en que **si no defines el Prop, Vue da error**.
-
 ---
 
-# 📤 **8. Eventos: hijo → padre**
+# 13. 🎯 **Eventos**
 
-El PDF enseña a usar:
+## Tipos:
 
-- `defineEmits()` en el hijo
-- `$emit('evento')` para enviar datos
-- `@evento="funcion"` en el padre
+- **Inline handlers** → lógica simple.
+- **Method handlers** → lógica compleja.
 
-Ejemplo:
+## Custom Events (hijo → padre)
+
+En hijo:
 
 ```html
 <button @click="$emit('agregar-carrito', guitarra)"></button>
 ```
 
-En el padre:
+Declarar evento:
+
+```js
+defineEmits(["agregar-carrito"]);
+```
+
+En padre:
 
 ```html
 <Guitarra @agregar-carrito="agregarCarrito" />
@@ -179,15 +275,9 @@ En el padre:
 
 ---
 
-# 🧮 **9. Computed Properties**
+# 14. 🧮 **Computed Properties**
 
-El PDF enseña que sirven para:
-
-- Cálculos derivados del State
-- Optimizar rendimiento
-- Evitar repetir lógica
-
-Ejemplo típico:
+Variables derivadas que se recalculan automáticamente.
 
 ```js
 const totalPagar = computed(() =>
@@ -197,45 +287,113 @@ const totalPagar = computed(() =>
 
 ---
 
-# 👁️ **10. Watch**
+# 15. 👀 **Watch**
 
-El PDF lo usa para:
-
-- Guardar el carrito en localStorage
-- Detectar cambios profundos (`deep: true`)
-
-Ejemplo:
+Observa cambios en un state.
 
 ```js
-watch(carrito, guardarLocalstorage, { deep: true });
+watch(
+  carrito,
+  () => {
+    guardarLocalstorage();
+  },
+  { deep: true },
+);
 ```
 
 ---
 
-# 🎨 **11. Styles**
+# 16. 🌐 **Despliegue con Netlify**
 
-El PDF enseña:
+1. Ejecutar build:
 
-- `scoped` → estilos solo para ese componente
-- `lang="scss"` → usar Sass (requiere instalar `sass`)
+```bash
+npm run build
+```
 
----
-
-# 📝 **12. Formularios**
-
-El PDF enseña dos formas:
-
-### 1) `@input="función"`
-
-### 2) `v-model="state"`
-
-Y explica cómo funciona la **bidireccionalidad**.
+2. Subir carpeta `dist/` a Netlify.
+3. Personalizar URL si se desea.
 
 ---
 
-# 🧩 **13. Slots**
+# 17. 🎨 **Styles**
 
-El PDF enseña:
+## Scoped
 
-- `<slot>` para contenido dinámico
-- Slots nombrados con `v-slot:nombre`
+```html
+<style scoped>
+```
+
+Evita que los estilos afecten a otros componentes.
+
+## Sass
+
+```html
+<style lang="scss">
+```
+
+Requiere instalar:
+
+```bash
+npm install -D sass
+```
+
+---
+
+# 18. 📝 **Formularios**
+
+## v-on:input
+
+```html
+<input @input="e => presupuesto = e.target.value" />
+```
+
+## v-model (recomendado)
+
+```html
+<input v-model="presupuesto" />
+```
+
+Para objetos:
+
+```html
+<input v-model="pelicula.titulo" />
+```
+
+---
+
+# 19. 📦 **Slots**
+
+Permiten inyectar contenido dentro de un componente.
+
+```html
+<Alerta>
+  <h2>Error</h2>
+</Alerta>
+```
+
+En el componente:
+
+```html
+<slot></slot>
+```
+
+## Slots nombrados
+
+```html
+<slot name="alertaError"></slot>
+```
+
+---
+
+# 20. 🧩 **Objetos reactivos dentro de arrays**
+
+Problema: `reactive()` pierde reactividad dentro de arrays.
+
+Solución → usar spread:
+
+```js
+gastos.value.push({ ...gasto });
+```
+
+---
