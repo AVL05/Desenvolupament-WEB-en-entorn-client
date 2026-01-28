@@ -1,0 +1,26 @@
+:root {
+  --color-primary: #8b5cf6; /* Violeta moderno */
+  --color-primary-dark: #7c3aed;
+  --color-text: #374151;
+  --color-bg: #f3f4f6;
+  --font-family: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Reset básico */
+button,
+input {
+  font-family: inherit;
+}

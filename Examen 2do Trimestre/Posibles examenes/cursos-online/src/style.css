@@ -1,0 +1,47 @@
+/* Definición de Variables CSS globales */
+:root {
+  --color-primary: #10b981; /* un verde moderno (emerald) */
+  --color-primary-dark: #059669;
+  --color-secondary: #3b82f6; /* azul */
+  --color-text: #1f2937;
+  --color-bg: #f3f4f6;
+  --font-family: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-family);
+}
